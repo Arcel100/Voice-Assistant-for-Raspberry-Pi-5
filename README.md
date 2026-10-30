@@ -171,7 +171,7 @@ Key options to check:
 
 - `mic`: Set to part of your USB microphone's name (e.g., `"Kraken"` or `"USB Audio"`). Set to `false` for system default.
 
-- `button_pin`: Set to your hardware push-to-talk GPIO pin number (default: `17`). Set to `false` if not using a GPIO pin.
+- `button_pin`: Set to your hardware push-to-talk GPIO pin number (default: `17`) (physical pin number is 11 and ground is 9, look up GPIO pin layout for pi 5). Set to `false` if not using a GPIO pin.
 
 - `talk_key`: Keyboard key to trigger talking if no physical GPIO button is used (e.g., `"KEY_F14"`).
 
