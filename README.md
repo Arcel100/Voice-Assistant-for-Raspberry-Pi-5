@@ -304,3 +304,6 @@ Create a `commands.json` file alongside `dictate.py` to add custom spoken action
 
 
 Open-source under the MIT License. Built for cyberdeck builders, accessibility hacks, and hands-free Linux terminal operation.
+
+
+Created with Claude AI
