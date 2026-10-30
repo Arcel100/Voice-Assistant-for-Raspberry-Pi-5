@@ -1,0 +1,133 @@
+# Settings for dictate.py. Edit, save, then start the script again (a new start replaces the old).
+# Delete a line to go back to its default. Where it says 'false = ...', false turns that setting off.
+# Your own voice commands live in commands.json, and the words it learned in words.json.
+
+# Key that changes mode (tap) or model (long press). keyd maps the ` key to this.
+mode_key = "KEY_F13"
+
+# Optional keyboard key that also talks, e.g. KEY_F14 (map it in keyd). false = off.
+talk_key = "KEY_F7"
+
+# Seconds to hold the mode key for a long press.
+long_press = 0.6
+
+# A long press cycles through these. Only one is kept in memory at a time.
+models = ["base.en", "tiny.en"]
+
+# Model to start with. A model name on the command line (python3 dictate.py tiny.en) overrides this.
+start_model = "base.en"
+
+# Optional Hugging Face access token (starts with hf_). Only used when a model has to be downloaded;
+# removes the 'unauthenticated requests' warning. Keep this file private. false = none.
+# hf_token = "Insert Your Hugging Face Token here"
+
+# CPU threads for speech recognition. 3 leaves a core free so the animation and your game stay smooth.
+# 4 is a bit faster but laggier.
+whisper_threads = 3
+
+# Part of the mic's name, or its number. The script waits for it to be plugged in. false = system
+# default.
+mic = false
+
+# Where timer alarms play (name or number). false = system default.
+sound_device = false
+
+# GPIO number of the push-to-talk button. false = no button.
+button_pin = 17
+
+# Press the talk button this many times...
+mash_count = 5
+
+# ...within this many seconds to cancel the current task.
+mash_window = 2.5
+
+# Safety cap in case the talk button gets stuck down.
+max_record_secs = 120
+
+# The on-screen dot and pills.
+show_overlay = true
+
+# After you say 'close <app>', how long to wait before telling you it is still open (so you can say
+# 'force quit <app>'). 0 = don't check.
+close_wait_secs = 8
+
+# Widest a pop-up box may grow, in pixels. The box grows to fit what it says; anything longer wraps
+# onto more lines. (Never wider than the screen.)
+popup_max_width = 760
+
+# Keep the stopwatch time on screen while it's running.
+show_stopwatch = true
+
+# Pressing the talk button 5 times (cancel) also stops the stopwatch if it's running.
+cancel_stops_stopwatch = true
+
+# How long the final time stays on screen after 'stop stopwatch'.
+stopwatch_stop_show_secs = 5.0
+
+# Remove the full stop Whisper puts at the end of a sentence.
+strip_trailing_period = true
+
+# Press Enter after typing in Minecraft mode.
+minecraft_auto_send = true
+
+# Key that opens chat in Minecraft.
+mc_chat_key = "KEY_ENTER"
+
+# Key that opens chat with / already typed. false = open chat, then type the /.
+mc_command_key = "KEY_SLASH"
+
+# Words that help speech mode spell things right. false = none.
+initial_prompt = "Minecraft, creeper, redstone, diamond, Nether, Enderman."
+
+# Used for web searches and 'open <website>'.
+browser_cmd = "firefox"
+
+# Used for apps that need a terminal window (htop, vim ...).
+terminal_cmd = "lxterminal -e"
+
+# In command mode, a spoken question ('who created the rubik's cube') becomes a web search.
+auto_search_questions = true
+
+# Pause between chained commands, in seconds.
+chain_delay = 0.4
+
+# Pause after opening an app, so it can start before the next step.
+chain_delay_after_open = 3.0
+
+# How far 'move mouse left' goes (per count).
+mouse_move_px = 120
+
+# How far 'nudge mouse left' goes (per count).
+mouse_nudge_px = 30
+
+# Tune this if the pointer travels too far or not far enough.
+mouse_scale = 1.0
+
+# Scroll amount per 'scroll down'.
+wheel_notches = 3
+
+# Refuse things like 'click 200 times'.
+max_repeat = 30
+
+# Text file your voice notes are saved to. A bare name lives next to dictate.py; a full path also
+# works.
+notes_file = "notes.txt"
+
+# Show each note's date and time under it on the screen list. They are always saved in the file.
+notes_show_dates = false
+
+# Dangerous commands (shut down, restart): "unsure" = only ask yes/no when it is not sure what you
+# said, "always" = always ask, "never" = never ask.
+confirm_mode = "always"
+
+# How closely what it heard must match the command (0 to 1) to count as sure. 'shut down' is a perfect
+# match. 'shot down' or 'shutting down' are not.
+confirm_sure_score = 0.95
+
+# Whisper's own confidence in what it heard (closer to 0 = more confident). Below this it counts as
+# unsure. The log line for every command prints this number so you can tune it.
+confirm_min_logprob = -0.8
+
+# Extra phrases to treat as dangerous, e.g. ["close window"]. Shut down and restart always are. In
+# commands.json you can also mark one: {"my command": {"run": "...", "dangerous": true}}
+confirm_commands = []
