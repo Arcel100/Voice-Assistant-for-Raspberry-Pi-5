@@ -62,7 +62,7 @@
 
 
 
-## 🛠️ Foolproof Setup Tutorial
+## 🛠️ Setup
 
 
 
@@ -132,10 +132,9 @@ Install the required Python libraries. On modern Debian/Raspberry Pi OS, use `--
 
 ```bash
 
-pip install sounddevice numpy evdev tomli --break-system-packages
+pip install sounddevice numpy evdev tomli
 
 ```
-
 
 
 ### Step 4: Generate Configuration File
