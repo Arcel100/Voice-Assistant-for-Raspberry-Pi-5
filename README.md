@@ -62,73 +62,143 @@
 
 
 
-## 🛠️ Requirements & Setup
+## 🛠️ Foolproof Setup Tutorial
 
 
 
-### Hardware
-
-- **Single Board Computer**: Raspberry Pi 4, Pi 5, or similar Linux device.
-
-- **Audio Input**: USB Microphone or soundcard input.
-
-- **Hardware Button** *(Optional)*: Momentary push button wired to a GPIO pin (Default: `GPIO 17`).
+Follow these step-by-step instructions to get `dictate.py` installed and running on your Raspberry Pi.
 
 
 
-### System Dependencies
+### Step 1: Install System Dependencies
 
-- **OS**: Linux (Raspberry Pi OS / Debian Bookworm)
-
-- **Python**: 3.11+ (includes native `tomllib`)
-
-- **Required Packages**:
-
-  ```bash
-
-  pip install evdev sounddevice numpy
-
-  ```
-
-- **Recommended System Utilities**:
-
-  - `brightnessctl` *(screen brightness)*
-
-  - `playerctl` & `wpctl` *(audio & media control)*
-
-  - `nmcli` *(Wi-Fi management)*
-
-  - `upower` *(battery status)*
-
-  - `grim` *(screenshots on Wayland)*
+Open your terminal and install all required system utilities for audio, input simulation, and hardware controls:
 
 
 
----
+```bash
+
+sudo apt update && sudo apt install -y \
+
+    python3-pip \
+
+    python3-sounddevice \
+
+    python3-numpy \
+
+    python3-evdev \
+
+    brightnessctl \
+
+    playerctl \
+
+    wireplumber \
+
+    nmcli \
+
+    upower \
+
+    grim
+
+```
 
 
 
-## 🚀 Quick Start
+### Step 2: Set Up Workspace & Files
+
+Create a dedicated directory for your voice tools and place your script files inside:
 
 
 
-1. **Place Script Files**: Ensure `dictate.py` and `mcdata.py` are in the same folder (e.g., `~/stt/`).
+```bash
 
-2. **Generate Config**: Run the script once to generate `config.toml`:
+mkdir -p ~/stt
 
-   ```bash
+cd ~/stt
 
-   python3 dictate.py
+```
 
-   ```
 
-3. **Launch with Specific Model**:
 
-   ```bash
+> 📌 **Note:** Ensure both `dictate.py` and `mcdata.py` are saved in this `~/stt/` folder.
 
-   python3 dictate.py tiny.en
 
-   ```
+
+### Step 3: Install Python Packages
+
+Install the required Python libraries. On modern Debian/Raspberry Pi OS, use `--break-system-packages` if you are not using a virtual environment:
+
+
+
+```bash
+
+pip install sounddevice numpy evdev tomli --break-system-packages
+
+```
+
+
+
+### Step 4: Generate Configuration File
+
+Run the script for the first time to auto-generate `config.toml` with default settings and helpful inline comments:
+
+
+
+```bash
+
+python3 dictate.py
+
+```
+
+*(Press `Ctrl + C` after it creates the configuration file).*
+
+
+
+### Step 5: Customize `config.toml`
+
+Open `config.toml` in your preferred text editor:
+
+
+
+```bash
+
+nano config.toml
+
+```
+
+
+
+Key options to check:
+
+- `mic`: Set to part of your USB microphone's name (e.g., `"Kraken"` or `"USB Audio"`). Set to `false` for system default.
+
+- `button_pin`: Set to your hardware push-to-talk GPIO pin number (default: `17`). Set to `false` if not using a GPIO pin.
+
+- `talk_key`: Keyboard key to trigger talking if no physical GPIO button is used (e.g., `"KEY_F14"`).
+
+- `mode_key`: Key to cycle modes / long-press to switch models (default: `"KEY_F13"`).
+
+
+
+### Step 6: Launch the Script
+
+Start the voice assistant with your preferred Whisper model:
+
+
+
+```bash
+
+# Start with default settings
+
+python3 dictate.py
+
+
+
+# Or start directly with the tiny model
+
+python3 dictate.py tiny.en
+
+```
 
 
 
@@ -200,7 +270,7 @@
 
 
 
-Create a `commands.json` file alongside `dictate.py` to add custom triggers:
+Create a `commands.json` file alongside `dictate.py` to add custom spoken actions:
 
 
 
@@ -234,4 +304,4 @@ Create a `commands.json` file alongside `dictate.py` to add custom triggers:
 
 
 
-Open-source under the MIT License. Designed for cyberdeck builders, accessibility hacks, and hands-free Linux terminal operation.
+Open-source under the MIT License. Built for cyberdeck builders, accessibility hacks, and hands-free Linux terminal operation.
