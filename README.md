@@ -101,7 +101,7 @@ The script reads your mode key through [`keyd`](https://github.com/rvaiya/keyd),
 
 ```bash
 cd ~
-git clone https://github.com/YOUR-USERNAME/YOUR-REPO.git stt
+git clone https://github.com/Arcel100/Voice-Assistant-for-Raspberry-Pi-5.git stt
 cd stt
 ```
 
@@ -209,7 +209,7 @@ Want a different pin? Set `button_pin` in `config.toml` to the **GPIO number**, 
 python3 -m sounddevice
 ```
 
-Find your mic in the list. By default the script looks for a device whose name contains `Kraken`. If yours is different, set `mic` in `config.toml` (part of the name, or its number) after the first run.
+Find your mic in the list. By default the script looks for a device whose name contains `PnP`. If yours is different, set `mic` in `config.toml` (part of the name, or its number) after the first run.
 
 ### 8. First run
 
@@ -449,7 +449,7 @@ For settings marked **off**, write `false` to turn them off.
 | `start_model` | `"base.en"` | Model to start with. A model name on the command line (python3 dictate.py tiny.en) overrides this. |
 | `hf_token` | off | Optional Hugging Face access token (starts with hf_). Only used when a model has to be downloaded; removes the 'unauthenticated requests' warning. Keep this file private. false = none. |
 | `whisper_threads` | `3` | CPU threads for speech recognition. 3 leaves a core free so the animation and your game stay smooth. 4 is a bit faster but laggier. |
-| `mic` | `"Kraken"` | Part of the mic's name, or its number. The script waits for it to be plugged in. false = system default. |
+| `mic` | `"PnP"` | Part of the mic's name, or its number. The script waits for it to be plugged in. false = system default. |
 | `sound_device` | off | Where timer alarms play (name or number). false = system default. |
 | `button_pin` | `17` | GPIO number of the push-to-talk button. false = no button. |
 | `mash_count` | `5` | Press the talk button this many times... |
