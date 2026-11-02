@@ -199,7 +199,7 @@ Want a different pin? Set `button_pin` in `config.toml` to the **GPIO number**, 
 python3 -m sounddevice
 ```
 
-Find your mic in the list. By default the script looks for a device whose name contains `PnP`. If yours is different, set `mic` in `config.toml` (part of the name, or its number) after the first run.
+Find your mic in the list. By default it is uses the `default` audio output. If yours isn't working, set `mic` in `config.toml` (to part of the name of your mic, or its number) after the first run.
 
 ### 8. First run
 
@@ -207,24 +207,59 @@ Find your mic in the list. By default the script looks for a device whose name c
 ~/stt/venv/bin/python ~/stt/dictate.py
 ```
 
-On the first run it will:
+On the **first** run it will:
 
-1. Write a fully commented **`config.toml`** next to the script.
+1. Automatically write a fully commented **`config.toml`** next to the script.
 2. Download the Whisper model (this needs internet once, and can take a minute).
 3. Start listening for the mode key and the button.
 
-Starting it again replaces the old copy, so you never end up with two running.
+Launching a new instance of the program automatically terminates any currently running instance, ensuring only one copy is active at a time.
 
 You can also pick a model on the command line: `python3 dictate.py tiny.en`
 
 ### 9. Start it automatically on boot
-
-Add one line to your desktop session's autostart. On current Raspberry Pi OS (labwc), edit `~/.config/labwc/autostart`:
-
+ 
+Add one line to your desktop session's autostart, so the script launches every time you log in. Steps 4 and 5 (input permissions and keyd) must already be done, or it will start but not be able to type.
+ 
+**labwc** (current Raspberry Pi OS):
+ 
 ```bash
-/home/YOUR-USERNAME/stt/venv/bin/python /home/YOUR-USERNAME/stt/dictate.py &
+mkdir -p ~/.config/labwc
+cp -n /etc/xdg/labwc/autostart ~/.config/labwc/autostart
+nano ~/.config/labwc/autostart
 ```
-
+ 
+> [!IMPORTANT]
+> The `cp -n` line matters. A personal `autostart` file **replaces** the system one, so without a copy you can lose the panel and wallpaper. If you already have your own file, skip the copy and just add the line.
+ 
+Add this at the **bottom** of the file, using your own username. The `&` at the end is required, and the log file lets you see what it prints:
+ 
+```bash
+/home/YOUR-USERNAME/stt/venv/bin/python -u /home/YOUR-USERNAME/stt/dictate.py >> /home/YOUR-USERNAME/stt/dictate.log 2>&1 &
+```
+ 
+<details>
+<summary><b>Wayfire</b> (older Raspberry Pi OS images)</summary>
+Edit `~/.config/wayfire.ini` and add this section (or add the line to an existing `[autostart]` section):
+ 
+```ini
+[autostart]
+dictate = /home/YOUR-USERNAME/stt/venv/bin/python -u /home/YOUR-USERNAME/stt/dictate.py >> /home/YOUR-USERNAME/stt/dictate.log 2>&1
+```
+ 
+</details>
+**Check that it works:** reboot, then run:
+ 
+```bash
+pgrep -af dictate.py        # shows the process if it is running
+tail -f ~/stt/dictate.log   # watch what it hears (Ctrl+C to stop watching)
+```
+ 
+**Stop or restart it:** run `pkill -f dictate.py` to stop it. To restart it, just start it again by hand. A new start always replaces the old copy.
+ 
+> [!TIP]
+> If it works when you run it by hand but not from autostart, read `~/stt/dictate.log`. The usual causes are a wrong path, a missing `&`, or keyd not being enabled.
+ 
 ---
 
 ## Using it
@@ -439,7 +474,7 @@ For settings marked **off**, write `false` to turn them off.
 | `start_model` | `"base.en"` | Model to start with. A model name on the command line (python3 dictate.py tiny.en) overrides this. |
 | `hf_token` | off | Optional Hugging Face access token (starts with hf_). Only used when a model has to be downloaded; removes the 'unauthenticated requests' warning. Keep this file private. false = none. |
 | `whisper_threads` | `3` | CPU threads for speech recognition. 3 leaves a core free so the animation and your game stay smooth. 4 is a bit faster but laggier. |
-| `mic` | `"PnP"` | Part of the mic's name, or its number. The script waits for it to be plugged in. false = system default. |
+| `mic` | `"false"` | Part of the mic's name, or its number. The script waits for it to be plugged in. false = system default. |
 | `sound_device` | off | Where timer alarms play (name or number). false = system default. |
 | `button_pin` | `17` | GPIO number of the push-to-talk button. false = no button. |
 | `mash_count` | `5` | Press the talk button this many times... |
