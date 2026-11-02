@@ -78,7 +78,7 @@ The script reads your mode key through [`keyd`](https://github.com/rvaiya/keyd),
 | Part | Notes |
 |---|---|
 | Raspberry Pi 5 | Built and used on the 4 GB model |
-| USB microphone or headset | Developed with a Razer Kraken V4 X. The Pi 5 has no mic input of its own |
+| USB microphone or headset | Any mic works fine (I use this https://amzn.to/4iqYrIz). The Pi 5 has no mic input of its own though |
 | Push button *(optional)* | Wired between **GPIO17** and **GND**. You can use a keyboard key instead |
 | Keyboard | Needed for the mode key |
 | Display | The on-screen overlay needs a desktop session |
