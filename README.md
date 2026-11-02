@@ -56,16 +56,6 @@
 
 ## How it works
 
-```mermaid
-flowchart LR
-    A[Hold GPIO button] --> B[USB mic records]
-    B --> C[faster-whisper<br/>local speech-to-text]
-    C --> D{Current mode}
-    D -->|Speech| E[Type the text<br/>via virtual keyboard]
-    D -->|Minecraft| F[Chat / slash commands<br/>typed into the game]
-    D -->|Command| G[Match a voice command<br/>and run it]
-    H[Tap the mode key] -. cycles .-> D
-```
 
 The script reads your mode key through [`keyd`](https://github.com/rvaiya/keyd), listens to the mic while the button is held, transcribes it, and then either types characters through a virtual keyboard (`/dev/uinput`) or runs the matching command.
 
