@@ -17,6 +17,7 @@
 </div>
 
 `dictate.py` is a single-file voice assistant built for a hand-made Raspberry Pi 5 cyberdeck. Hold a button, say something, let go, and it types it, runs it, or sends it to Minecraft chat. Speech recognition runs **locally** on the Pi with [faster-whisper](https://github.com/SYSTRAN/faster-whisper), so nothing you say leaves the device.
+Sadly, this is not a full AI (this is meant to be a light program) that will respond to every action you ask it,  
 
 ---
 
