@@ -244,7 +244,7 @@ Edit `~/.config/wayfire.ini` and add this section (or add the line to an existin
  
 ```ini
 [autostart]
-dictate = /home/YOUR-USERNAME/stt/venv/bin/python -u /home/YOUR-USERNAME/stt/dictate.py >> /home/YOUR-USERNAME/stt/dictate.log 2>&1
+dictate = /home/<ACCOUNT-NAME>/stt/venv/bin/python -u /home/<ACCOUNT-NAME>/stt/dictate.py >> /home/<ACCOUNT-NAME>/stt/dictate.log 2>&1
 ```
  
 </details>
